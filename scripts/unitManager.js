@@ -60,7 +60,15 @@ Engine.UnitManager = (function()
     UnitManager.prototype.amountDestroyed = function( unitType )
     {
         var amnt = this.destroyedUnits.get( unitType );
-        amnt === "undefined" ? return 0 : return amnt;
+
+        if( amnt === "undefined" )
+        { 
+            return 0; 
+        }
+        else
+        { 
+            return amnt; 
+        }
     }
 
 })();
