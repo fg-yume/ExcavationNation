@@ -1,39 +1,52 @@
-var game;
-var tiles;
+var game = new Phaser.Game(800, 800, Phaser.Auto, 'game');
 
-window.onload = function() {
+/*window.onload = function() {
 	console.log("loaded");
-	game = new Phaser.Game(800, 720, Phaser.Auto, "");
-	game.state.add("PlayGame", playGame);
-	game.state.start("PlayGame");
-}
+	game = new Phaser.Game(800, 800, Phaser.Auto, 'game');
+};*/
 
-var playGame = function(game){};
+var PhaserGame = PhaserGame || function() {
+	this.background = null;
+	this.foreground = null;
+	
+	this.player = null;
+	this.cursors = null;
+	this.speed = 300;
+	
+	this.weapons = [];
+	this.currentWeapon = 0;
+	this.weaponName = null;
+};
 
-playGame.prototype = {
+PhaserGame.prototype = {
+	init: function() {
+		this.game.renderer.renderSession.roundPixel = true;
+		this.physics.startSystem(Phaser.Physics.ARCADE);
+	},
 	preload: function() {
-		// load images here ex:
-		// game.load.image("goat", "goat.png");
-		game.load.image("tile", "/img/tile.png");
+		this.load.image('player', 'img/player.png');
 	},
 	create: function() {
-		game.stage.backgroundColor = 0x74af21;
-		rounds = -1;
-		tiles = new Array(6);
-		for(var i = 0; i < tiles.Count; i++) {
-			tiles[i] = new Array(6);
-			for(var j = 0; j < tiles[i].Count; j++) {
-				tiles[i][j] = game.add.sprite(x, y, "tile");
-			}
-		}
-		game.input.onDown.add(function() {
-			// on down logic
-		});
-		game.input.onUp.add(function() {
-			console.log("UP");
-		});
-	}, 
+		this.player = this.add.sprite(64, 200, 'player');
+		this.physics.arcade.enable(this.player);
+		this.player.body.collideWorldBounds = true;
+		this.cursors = this.input.keyboard.createCursorKeys();
+	},
 	update: function() {
+		this.player.body.velocity.set(0);
 		
+		if(this.cursors.left.isDown) {
+			this.player.body.velocity.x = -this.speed;
+		} else if(this.cursors.right.isDown) {
+			this.player.body.velocity.x = this.speed;
+		} 
+		
+		if(this.cursors.up.isDown) {
+			this.player.body.velocity.y = -this.speed;
+		} else if(this.cursors.down.isDown) {
+			this.player.body.velocity.y = this.speed;
+		}
 	}
-}
+};
+
+game.state.add('Game', PhaserGame, true);
