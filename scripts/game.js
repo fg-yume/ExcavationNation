@@ -1,4 +1,4 @@
-var game = new Phaser.Game(800, 800, Phaser.Auto, 'game');
+var game = game || new Phaser.Game(800, 800, Phaser.Auto, 'game');
 
 var PhaserGame = function() {
 	this.background = null;
@@ -46,7 +46,7 @@ PhaserGame.prototype = {
 				this.background.x += this.speed / 50;
 			}
 		} else if(this.keyboard.isDown(68)) {
-			if(this.player.body.position.x + this.player.body.width + 100 < 800) {
+			if(this.player.body.position.x + this.player.body.width + 100 < 800 || this.background.x <= -this.background.height + this.game.height) {
 				this.player.body.velocity.x = this.speed;
 			} else {
 				this.background.x += -this.speed / 50;
@@ -60,7 +60,7 @@ PhaserGame.prototype = {
 				this.background.y += this.speed / 50;
 			}
 		} else if(this.keyboard.isDown(83)) {
-			if(this.player.body.position.y + this.player.body.height + 100 < 800) {
+			if(this.player.body.position.y + this.player.body.height + 100 < 800 || this.background.y <= -this.background.width + this.game.width) {
 				this.player.body.velocity.y = this.speed;
 			} else {
 				this.background.y -= this.speed / 50;
