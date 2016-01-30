@@ -17,13 +17,22 @@ Weapon.SingleBullet = function(game) {
 Weapon.SingleBullet.prototype = Object.create(Phaser.Group.prototype);
 Weapon.SingleBullet.prototype.constructor = Weapon.SingleBullet;
 
-Weapon.SingleBullet.prototype.fire = function(source) {
+Weapon.SingleBullet.prototype.fire = function(source, target) {
 	if(this.game.time.time < this.nextFire) { return; }
 	
-	var x = source.x + 10;
-	var y = source.y + 10;
+	var x = source.x + source.width / 2;
+	var y = source.y + source.height / 2;
 	
-	this.getFirstExists(false).fire(x, y, 0, this.bulletSpeed, 0, 0);
+	var deltaY = target.y - source.y;
+	var deltaX = target.x - source.x;
+	console.log(target.x + " | " + target.y);
+	var angle = Math.atan(deltaY / deltaX) * 180 / Math.PI;
+	if(deltaX < 0) {
+		angle += 180;
+	}
+	console.log(angle);
+	
+	this.getFirstExists(false).fire(x, y, angle, this.bulletSpeed, 0, 0);
 	
 	this.nextFire = this.game.time.time + this.fireRate;
 };
