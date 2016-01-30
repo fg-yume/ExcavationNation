@@ -25,12 +25,10 @@ Weapon.SingleBullet.prototype.fire = function(source, target) {
 	
 	var deltaY = target.y - source.y;
 	var deltaX = target.x - source.x;
-	console.log(target.x + " | " + target.y);
 	var angle = Math.atan(deltaY / deltaX) * 180 / Math.PI;
 	if(deltaX < 0) {
 		angle += 180;
 	}
-	console.log(angle);
 	
 	this.getFirstExists(false).fire(x, y, angle, this.bulletSpeed, 0, 0);
 	

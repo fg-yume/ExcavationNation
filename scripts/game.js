@@ -1,6 +1,6 @@
 var game = new Phaser.Game(800, 800, Phaser.Auto, 'game');
 
-var PhaserGame = PhaserGame || function() {
+var PhaserGame = function() {
 	this.background = null;
 	this.foreground = null;
 	
@@ -20,8 +20,10 @@ PhaserGame.prototype = {
 	},
 	preload: function() {
 		this.load.image('player', 'img/player.png');
+		this.load.image('background', 'img/background.png');
 	},
 	create: function() {
+		this.background = this.add.sprite(-1600, -1600, 'background');
 		this.player = this.add.sprite(400, 400, 'player');
 		this.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds = true;
@@ -38,22 +40,30 @@ PhaserGame.prototype = {
 		}
 		
 		if(this.keyboard.isDown(65)) {
-			if(this.player.body.position.x - 100 > 0) {
+			if(this.player.body.position.x - 100 > 0 || this.background.x >= 0) {
 				this.player.body.velocity.x = -this.speed;
+			} else {
+				this.background.x += this.speed / 50;
 			}
 		} else if(this.keyboard.isDown(68)) {
 			if(this.player.body.position.x + this.player.body.width + 100 < 800) {
 				this.player.body.velocity.x = this.speed;
+			} else {
+				this.background.x += -this.speed / 50;
 			}
 		}
 		
 		if(this.keyboard.isDown(87)) {
-			if(this.player.body.position.y - 100 > 0) {
+			if(this.player.body.position.y - 100 > 0 || this.background.y >= 0) {
 				this.player.body.velocity.y = -this.speed;
+			} else {
+				this.background.y += this.speed / 50;
 			}
 		} else if(this.keyboard.isDown(83)) {
 			if(this.player.body.position.y + this.player.body.height + 100 < 800) {
 				this.player.body.velocity.y = this.speed;
+			} else {
+				this.background.y -= this.speed / 50;
 			}
 		}
 	}
