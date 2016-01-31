@@ -1,5 +1,4 @@
 "use strict";
-
 var PhaserGame = PhaserGame || function() {
 	this.background = null;
 	this.foreground = null;
@@ -45,10 +44,10 @@ PhaserGame.prototype = {
 		this.keyboard = this.input.keyboard;
 		this.weapons.push(new Weapon.SingleBullet(this.game));
 		this.weapons.push(new Weapon.SpreadShot(this.game));
-		this.runes.push(new Rune(this.game, 400, 200, 'rune1'));
-		this.runes.push(new Rune(this.game, 200, 400, 'rune3'));
-		this.runes.push(new Rune(this.game, 600, 400, 'rune2'));
-		this.runes.push(new Rune(this.game, 400, 600, 'rune1'));
+		this.runes.push(new Rune(this.game, Math.floor((Math.random() * 4000) + -1600), Math.floor((Math.random() * 650) + 1750), 'rune1'));
+		this.runes.push(new Rune(this.game, Math.floor((Math.random() * 750) + -1600), Math.floor((Math.random() * 500) + -1600), 'rune2'));
+		this.runes.push(new Rune(this.game, Math.floor((Math.random() * 400) + 2000), Math.floor((Math.random() * 1500) + 200), 'rune3'));
+		
 		this.currentWeapon = 1;
 		this.pointer = this.input.mousePointer;
 		
@@ -184,6 +183,16 @@ PhaserGame.prototype = {
 				this.player.animations.play('upright');
 			else
 				this.player.frame = 2;
+		}
+		
+		for(var i = 0; i < this.runes.length; i++)
+		{
+			if(this.runes[i].overlap(this.player))
+			{
+				this.runes[i].destroy();
+				this.runes.splice(this.runes.indexOf(this.runes[i]), 1);
+				i--;
+			}
 		}
 	}
 };
