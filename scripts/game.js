@@ -31,10 +31,10 @@ PhaserGame.prototype = {
 		this.load.spritesheet('playersprite', 'img/playersprite.png', 34, 36);
 		
 		this.load.audio('soundtrack', 'audio/Magical_Girl.wav');
-		//this.load.audio('energyBall', 'audio/MagicalGirl-EnergyBall#3.wav');
-		//his.load.audio('itemPickup', 'audio/MagicalGirl-ItemPickup.wav');
-		//this.load.audio('jellySquish', 'audio/MagicalGirl-JellySquish.wav');
-		//this.load.audio('ow', 'audio/MagicalGirl-Ow.wav');
+		this.load.audio('energyBall', 'audio/MagicalGirl-EnergyBall3.wav');
+		this.load.audio('itemPickup', 'audio/MagicalGirl-ItemPickup.wav');
+		this.load.audio('jellySquish', 'audio/MagicalGirl-JellySquish.wav');
+		this.load.audio('ow', 'audio/MagicalGirl-Ow.wav');
 	},
 	create: function() {
 		this.background = this.add.sprite(-1600, -1600, 'background');
@@ -49,7 +49,7 @@ PhaserGame.prototype = {
 		this.runes.push(new Rune(this.game, 200, 400, 'rune3'));
 		this.runes.push(new Rune(this.game, 600, 400, 'rune2'));
 		this.runes.push(new Rune(this.game, 400, 600, 'rune1'));
-		this.currentWeapon = 1;
+		this.currentWeapon = 0;
 		this.pointer = this.input.mousePointer;
 		
 		this.player.animations.add('up', [0, 1], 10, true);
@@ -58,14 +58,18 @@ PhaserGame.prototype = {
 		this.player.animations.add('downright', [6, 7], 10, true);
 		this.player.animations.add('down', [8, 9], 10, true);
 		
-		this.energyBlast = this.game.add.audio('energyBall');
-	},   
+		this.energyBlast = this.add.audio('energyBall');
+		this.music = this.add.audio('soundtrack');
+		//this.music.play();
+		this.music.loopFull(0.5);
+	},
 	update: function() {
 		this.player.body.velocity.set(0);
 		
 		if(this.pointer.isDown) {
 			this.weapons[this.currentWeapon].fire(this.player, this.pointer);
 			//this.energyBlast.play();
+			this.play(this.energyBlast);
 		}
 		
 		this.moving = false;
