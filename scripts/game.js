@@ -13,6 +13,7 @@ var PhaserGame = PhaserGame || function() {
 	this.weaponName = null;
 	
 	this.runes = [];
+	this.enemyUnits = null;
 };
 
 PhaserGame.prototype = {
@@ -36,6 +37,11 @@ PhaserGame.prototype = {
 		this.runes.push(new Rune(this.game, Math.floor((Math.random() * 4000) + -1600), Math.floor((Math.random() * 650) + 1750), 'rune1'));
 		this.runes.push(new Rune(this.game, Math.floor((Math.random() * 750) + -1600), Math.floor((Math.random() * 500) + -1600), 'rune2'));
 		this.runes.push(new Rune(this.game, Math.floor((Math.random() * 400) + 2000), Math.floor((Math.random() * 1500) + 200), 'rune3'));
+
+		this.enemyUnits = new UnitManager.Units( this.game );
+
+		// TODO: load units
+		this.enemyUnits.createUnit( this.game, 10, 10, 100, "ranged_enemy" );
 		
 		this.currentWeapon = 1;
 		this.pointer = this.input.mousePointer;
@@ -50,6 +56,12 @@ PhaserGame.prototype = {
 	},   
 	update: function() {
 		this.player.body.velocity.set(0);
+
+		for( var i = this.enemyUnits.children.length -1; i > 0; --i )
+		{
+			this.enemyUnits.children[i].update( this.game, this.player.x, this.player.y );
+		}
+		//this.enemyUnits[0].update( this.game, this.player );
 		
 		if(this.pointer.isDown) {
 			this.weapons[this.currentWeapon].fire(this.player, this.pointer);
