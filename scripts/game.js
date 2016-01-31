@@ -1,3 +1,5 @@
+"use strict";
+
 var PhaserGame = PhaserGame || function() {
 	this.background = null;
 	this.foreground = null;
@@ -22,31 +24,47 @@ PhaserGame.prototype = {
 		//this.load.image('player', 'img/player.png');
 	},
 	create: function() {
+		this.background = this.add.sprite(-1600, -1600, 'background');
 		this.player = this.add.sprite(400, 400, 'player');
 		this.physics.arcade.enable(this.player);
 		this.player.body.collideWorldBounds = true;
-		this.cursors = this.input.keyboard.createCursorKeys();
-	},
+		this.keyboard = this.input.keyboard;
+		this.weapons.push(new Weapon.SingleBullet(this.game));
+		this.currentWeapon = 0;
+		this.pointer = this.input.mousePointer;
+	},   
 	update: function() {
 		this.player.body.velocity.set(0);
 		
-		if(this.cursors.left.isDown) {
-			if(this.player.body.position.x - 100 > 0) {
-				this.player.body.velocity.x = -this.speed;
-			}
-		} else if(this.cursors.right.isDown) {
-			if(this.player.body.position.x + this.player.body.width + 100 < 800) {
-				this.player.body.velocity.x = this.speed;
-			}
-		} 
+		if(this.pointer.isDown) {
+			this.weapons[this.currentWeapon].fire(this.player, this.pointer);
+		}
 		
-		if(this.cursors.up.isDown) {
-			if(this.player.body.position.y - 100 > 0) {
-				this.player.body.velocity.y = -this.speed;
+		if(this.keyboard.isDown(65)) {
+			if(this.player.body.position.x - 100 > 0 || this.background.x >= 0) {
+				this.player.body.velocity.x = -this.speed;
+			} else {
+				this.background.x += this.speed / 50;
 			}
-		} else if(this.cursors.down.isDown) {
-			if(this.player.body.position.y + this.player.body.height + 100 < 800) {
+		} else if(this.keyboard.isDown(68)) {
+			if(this.player.body.position.x + this.player.body.width + 100 < 800 || this.background.x <= -this.background.height + this.game.height) {
+				this.player.body.velocity.x = this.speed;
+			} else {
+				this.background.x += -this.speed / 50;
+			}
+		}
+		
+		if(this.keyboard.isDown(87)) {
+			if(this.player.body.position.y - 100 > 0 || this.background.y >= 0) {
+				this.player.body.velocity.y = -this.speed;
+			} else {
+				this.background.y += this.speed / 50;
+			}
+		} else if(this.keyboard.isDown(83)) {
+			if(this.player.body.position.y + this.player.body.height + 100 < 800 || this.background.y <= -this.background.width + this.game.width) {
 				this.player.body.velocity.y = this.speed;
+			} else {
+				this.background.y -= this.speed / 50;
 			}
 		}
 	}

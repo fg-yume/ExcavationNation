@@ -11,6 +11,7 @@ var SplashScreen = function(game){
 SplashScreen.prototype = {
     preload: function(){
         this.game.load.image("player", "img/player.png" );
+        this.game.load.image("background", "img/background.png");
     },
 
     create: function(){
