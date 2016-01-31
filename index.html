@@ -18,6 +18,7 @@
         <script src="scripts/splashScreen.js"></script>
         <script src="scripts/title.js"></script>
         <script src="scripts/game.js"></script>
+		<script src="scripts/gamewin.js"></script>
 
         <!-- entry -->
         <script>
@@ -33,7 +34,7 @@
                 game.state.add("Title", Title);
                 game.state.add("Game", PhaserGame);
                 //game.state.add("Credits", Credits);
-                //game.state.add("End", GameOver);
+                game.state.add("Win", GameWin);
 
                 // Entry point at boot
                 game.state.start("Boot");

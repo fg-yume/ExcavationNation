@@ -186,5 +186,26 @@ PhaserGame.prototype = {
 				i--;
 			}
 		}
+		
+		if(this.runes.length == 0){
+			this.game.state.start("Win")
+		}
+	},
+	
+	shutdown: function(){
+		this.music.stop();
+			this.background = null;
+	this.foreground = null;
+	
+	this.player = null;
+	this.cursors = null;
+	this.speed = 300;
+	this.moving = false;
+	
+	this.weapons = [];
+	this.currentWeapon = 0;
+	this.weaponName = null;
+	
+	this.runes = [];
 	}
 };
