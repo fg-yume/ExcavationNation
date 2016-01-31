@@ -22,6 +22,10 @@ Title.prototype = {
         this.load.image('rune2', 'img/rune2.png');
         this.load.image('rune3', 'img/rune3.png');
         this.load.spritesheet('playersprite', 'img/playersprite.png', 34, 36);
+
+        // Enemies
+        this.load.spritesheet( "ranged_enemy", "img/alraunesprite.png", 36, 37);
+        // TODO: other enemies
         
         // Audio ---
         this.load.audio('soundtrack', 'audio/Magical_Girl.wav');

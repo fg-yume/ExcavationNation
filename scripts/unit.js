@@ -18,13 +18,18 @@ var Unit = function( game, x, y, hp, imgKey )
 
     switch( imgKey )
     {
-        case "ranged":
-            this.weapons.push( new Weapon.SingleBullet( game ) );
+        case "ranged_enemy":
+            console.log("ranged")
+            this.weapons.push( new Weapon.SpreadShot( game ) );
         break;
 
         case "melee":
             // TODO: change
             this.weapons.push( new Weapon.SpreadShot( game ) );
+        break;
+        default:
+            console.log("default ranged");
+            this.weapons.push( new Weapon.SingleBullet( game ) );
         break;
     }
 };
@@ -32,4 +37,11 @@ var Unit = function( game, x, y, hp, imgKey )
 Unit.prototype = Object.create( Phaser.Sprite.prototype );
 Unit.prototype.constructor = Unit;
 
-// TODO: fire
+// TODO: fire & update
+Unit.prototype.update = function( game, playerX, playerY )
+{
+    var src = {x : this.x, y: this.y};
+    var target = {x: playerX, y: playerY};
+
+    //this.weapons[0].fire( src, target );
+};

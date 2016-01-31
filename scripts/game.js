@@ -42,7 +42,7 @@ PhaserGame.prototype = {
 
 		// TODO: load units
 		this.enemyUnits.createUnit( this.game, 10, 10, 100, "ranged_enemy" );
-		
+
 		this.currentWeapon = 1;
 		this.pointer = this.input.mousePointer;
 		
@@ -52,8 +52,11 @@ PhaserGame.prototype = {
 		this.player.animations.add('downright', [6, 7], 10, true);
 		this.player.animations.add('down', [8, 9], 10, true);
 		
-		this.energyBlast = this.game.add.audio('energyBall');
-	},   
+		this.energyBlast = this.add.audio('energyBall');
+		this.music = this.add.audio('soundtrack');
+		//this.music.play();
+		this.music.loopFull(0.5);
+	},
 	update: function() {
 		this.player.body.velocity.set(0);
 
@@ -66,6 +69,7 @@ PhaserGame.prototype = {
 		if(this.pointer.isDown) {
 			this.weapons[this.currentWeapon].fire(this.player, this.pointer);
 			//this.energyBlast.play();
+			this.play(this.energyBlast);
 		}
 		
 		this.moving = false;
@@ -89,7 +93,7 @@ PhaserGame.prototype = {
 				this.player.body.velocity.x = this.speed;
 			} else {
 				this.background.x += -this.speed / 50;
-				
+
 				for(var i = 0; i < this.runes.length; i++)
 				{
 					this.runes[i].x += -this.speed / 50;
