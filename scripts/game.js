@@ -45,10 +45,10 @@ PhaserGame.prototype = {
 		this.keyboard = this.input.keyboard;
 		this.weapons.push(new Weapon.SingleBullet(this.game));
 		this.weapons.push(new Weapon.SpreadShot(this.game));
-		this.runes.push(new Rune(this, 400, 200, 'rune1'));
-		this.runes.push(new Rune(this, 200, 400, 'rune3'));
-		this.runes.push(new Rune(this, 600, 400, 'rune2'));
-		this.runes.push(new Rune(this, 400, 600, 'rune1'));
+		this.runes.push(new Rune(this.game, 400, 200, 'rune1'));
+		this.runes.push(new Rune(this.game, 200, 400, 'rune3'));
+		this.runes.push(new Rune(this.game, 600, 400, 'rune2'));
+		this.runes.push(new Rune(this.game, 400, 600, 'rune1'));
 		this.currentWeapon = 1;
 		this.pointer = this.input.mousePointer;
 		
@@ -77,10 +77,10 @@ PhaserGame.prototype = {
 				this.background.x += this.speed / 50;
 				
 				//Runes
-				/*for(var i = 0; i < this.runes.length; i++)
+				for(var i = 0; i < this.runes.length; i++)
 				{
 					this.runes[i].x += this.speed / 50;
-				}*/
+				}
 			}
 		} else if(this.keyboard.isDown(68)) {
 			if(this.player.body.position.x + this.player.body.width + 100 < 800 || this.background.x <= -this.background.height + this.game.height) {
@@ -88,10 +88,10 @@ PhaserGame.prototype = {
 			} else {
 				this.background.x += -this.speed / 50;
 				
-				/*for(var i = 0; i < this.runes.length; i++)
+				for(var i = 0; i < this.runes.length; i++)
 				{
 					this.runes[i].x += -this.speed / 50;
-				}*/
+				}
 			}
 		}
 		
@@ -101,10 +101,10 @@ PhaserGame.prototype = {
 			} else {
 				this.background.y += this.speed / 50;
 				
-				/*for(var i = 0; i < this.runes.length; i++)
+				for(var i = 0; i < this.runes.length; i++)
 				{
 					this.runes[i].y += this.speed / 50;
-				}*/
+				}
 			}
 		} else if(this.keyboard.isDown(83)) {
 			if(this.player.body.position.y + this.player.body.height + 100 < 800 || this.background.y <= -this.background.width + this.game.width) {
@@ -112,10 +112,10 @@ PhaserGame.prototype = {
 			} else {
 				this.background.y -= this.speed / 50;
 				
-				/*for(var i = 0; i < this.runes.length; i++)
+				for(var i = 0; i < this.runes.length; i++)
 				{
 					this.runes[i].y += -this.speed / 50;
-				}*/
+				}
 			}
 		}
 		
