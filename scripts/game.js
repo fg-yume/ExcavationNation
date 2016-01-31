@@ -24,17 +24,6 @@ PhaserGame.prototype = {
 	},
 	preload: function() {
 
-		this.load.image('bullet', 'img/bullet.png');
-		this.load.image('rune1', 'img/rune1.png');
-		this.load.image('rune2', 'img/rune2.png');
-		this.load.image('rune3', 'img/rune3.png');
-		this.load.spritesheet('playersprite', 'img/playersprite.png', 34, 36);
-		
-		this.load.audio('soundtrack', 'audio/Magical_Girl.wav');
-		//this.load.audio('energyBall', 'audio/MagicalGirl-EnergyBall#3.wav');
-		//his.load.audio('itemPickup', 'audio/MagicalGirl-ItemPickup.wav');
-		//this.load.audio('jellySquish', 'audio/MagicalGirl-JellySquish.wav');
-		//this.load.audio('ow', 'audio/MagicalGirl-Ow.wav');
 	},
 	create: function() {
 		this.background = this.add.sprite(-1600, -1600, 'background');
