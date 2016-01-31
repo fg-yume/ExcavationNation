@@ -56,9 +56,13 @@ PhaserGame.prototype = {
 		this.music = this.add.audio('soundtrack');
 		//this.music.play();
 		this.music.loopFull(0.5);
+		
+		this.runeText = this.add.text(20, 20, "Runes left to find: " + this.runes.length)
 	},
 	update: function() {
 		this.player.body.velocity.set(0);
+		
+		this.runeText.text = "Runes left to find: " + this.runes.length;
 
 		for( var i = this.enemyUnits.children.length -1; i >= 0; --i )
 		{
