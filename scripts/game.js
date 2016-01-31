@@ -69,7 +69,7 @@ PhaserGame.prototype = {
 		if(this.pointer.isDown) {
 			this.weapons[this.currentWeapon].fire(this.player, this.pointer);
 			//this.energyBlast.play();
-			this.play(this.energyBlast);
+			//this.play(this.energyBlast);
 		}
 		
 		this.moving = false;
