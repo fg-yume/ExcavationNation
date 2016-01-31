@@ -11,7 +11,7 @@ var Unit = function( game, x, y, hp, imgKey )
     // Phaser Settings
     this.anchor.set(0.5);
     this.checkWorldBounds = true;
-    this.outOfBoundsKill = true;
+    //this.outOfBoundsKill = true;
     
     this.health = hp;
     this.weapons = [];
@@ -20,7 +20,7 @@ var Unit = function( game, x, y, hp, imgKey )
     {
         case "ranged_enemy":
             console.log("ranged")
-            this.weapons.push( new Weapon.SpreadShot( game ) );
+            this.weapons.push( new Weapon.SingleBullet( game ) );
         break;
 
         case "melee":
@@ -43,5 +43,15 @@ Unit.prototype.update = function( game, playerX, playerY )
     var src = {x : this.x, y: this.y};
     var target = {x: playerX, y: playerY};
 
-    //this.weapons[0].fire( src, target );
+    this.weapons[0].fire( src, target );
+};
+
+Unit.prototype.move = function( x, y )
+{
+    // don't need these...
+    var xMov = x || 0;
+    var yMov = y || 0;
+
+    this.x += xMov;
+    this.y += yMov; 
 };

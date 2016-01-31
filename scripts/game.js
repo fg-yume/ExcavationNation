@@ -60,7 +60,7 @@ PhaserGame.prototype = {
 	update: function() {
 		this.player.body.velocity.set(0);
 
-		for( var i = this.enemyUnits.children.length -1; i > 0; --i )
+		for( var i = this.enemyUnits.children.length -1; i >= 0; --i )
 		{
 			this.enemyUnits.children[i].update( this.game, this.player.x, this.player.y );
 		}
@@ -86,6 +86,13 @@ PhaserGame.prototype = {
 				{
 					this.runes[i].x += this.speed / 50;
 				}
+
+				// Enemy movement
+				for( var i = this.enemyUnits.children.length -1; i >= 0; --i )
+				{
+					//this.enemyUnits.children[i].move( this.speed / 50, 0 );
+					this.enemyUnits.children[i].x += this.speed / 50;
+				}
 			}
 		} else if(this.keyboard.isDown(68)) {
 			this.moving = true;
@@ -97,6 +104,12 @@ PhaserGame.prototype = {
 				for(var i = 0; i < this.runes.length; i++)
 				{
 					this.runes[i].x += -this.speed / 50;
+				}
+
+				// Enemy movement
+				for( var i = this.enemyUnits.children.length -1; i >= 0; --i )
+				{
+					this.enemyUnits.children[i].move( -this.speed / 50, 0 );
 				}
 			}
 		}
@@ -112,6 +125,12 @@ PhaserGame.prototype = {
 				{
 					this.runes[i].y += this.speed / 50;
 				}
+				
+				// Enemy movement
+				for( var i = this.enemyUnits.children.length -1; i >= 0; --i )
+				{
+					this.enemyUnits.children[i].move( 0, this.speed / 50 );
+				}
 			}
 		} else if(this.keyboard.isDown(83)) {
 			this.moving = true;
@@ -123,6 +142,12 @@ PhaserGame.prototype = {
 				for(var i = 0; i < this.runes.length; i++)
 				{
 					this.runes[i].y += -this.speed / 50;
+				}
+
+				// Enemy movement
+				for( var i = this.enemyUnits.children.length -1; i >= 0; --i )
+				{
+					this.enemyUnits.children[i].move( 0, -this.speed / 50 );
 				}
 			}
 		}
