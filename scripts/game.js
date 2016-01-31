@@ -1,5 +1,4 @@
 "use strict";
-
 var PhaserGame = PhaserGame || function() {
 	this.background = null;
 	this.foreground = null;
@@ -24,17 +23,6 @@ PhaserGame.prototype = {
 	},
 	preload: function() {
 
-		this.load.image('bullet', 'img/bullet.png');
-		this.load.image('rune1', 'img/rune1.png');
-		this.load.image('rune2', 'img/rune2.png');
-		this.load.image('rune3', 'img/rune3.png');
-		this.load.spritesheet('playersprite', 'img/playersprite.png', 34, 36);
-		
-		this.load.audio('soundtrack', 'audio/Magical_Girl.wav');
-		this.load.audio('energyBall', 'audio/MagicalGirl-EnergyBall3.wav');
-		this.load.audio('itemPickup', 'audio/MagicalGirl-ItemPickup.wav');
-		this.load.audio('jellySquish', 'audio/MagicalGirl-JellySquish.wav');
-		this.load.audio('ow', 'audio/MagicalGirl-Ow.wav');
 	},
 	create: function() {
 		this.background = this.add.sprite(-1600, -1600, 'background');
@@ -45,11 +33,10 @@ PhaserGame.prototype = {
 		this.keyboard = this.input.keyboard;
 		this.weapons.push(new Weapon.SingleBullet(this.game));
 		this.weapons.push(new Weapon.SpreadShot(this.game));
-		this.runes.push(new Rune(this.game, 400, 200, 'rune1'));
-		this.runes.push(new Rune(this.game, 200, 400, 'rune3'));
-		this.runes.push(new Rune(this.game, 600, 400, 'rune2'));
-		this.runes.push(new Rune(this.game, 400, 600, 'rune1'));
-		this.currentWeapon = 0;
+		this.runes.push(new Rune(this.game, Math.floor((Math.random() * 4000) + -1600), Math.floor((Math.random() * 650) + 1750), 'rune1'));
+		this.runes.push(new Rune(this.game, Math.floor((Math.random() * 750) + -1600), Math.floor((Math.random() * 500) + -1600), 'rune2'));
+		this.runes.push(new Rune(this.game, Math.floor((Math.random() * 400) + 2000), Math.floor((Math.random() * 1500) + 200), 'rune3'));
+		this.currentWeapon = 1;
 		this.pointer = this.input.mousePointer;
 		
 		this.player.animations.add('up', [0, 1], 10, true);
@@ -188,6 +175,16 @@ PhaserGame.prototype = {
 				this.player.animations.play('upright');
 			else
 				this.player.frame = 2;
+		}
+		
+		for(var i = 0; i < this.runes.length; i++)
+		{
+			if(this.runes[i].overlap(this.player))
+			{
+				this.runes[i].destroy();
+				this.runes.splice(this.runes.indexOf(this.runes[i]), 1);
+				i--;
+			}
 		}
 	}
 };
