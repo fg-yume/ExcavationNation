@@ -87,36 +87,34 @@ PhaserGame.prototype = {
 		var deltaY = this.pointer.y - this.player.y;
 		var deltaX = this.pointer.x - this.player.x;
 		var angle = Math.atan(deltaY / deltaX) * 180 / Math.PI;
+		angle += 90;
 		if(deltaX < 0) {
 			angle += 180;
 		}
 		
 		console.log(angle);
-		if(angle >= 75 && angle < 120) {
-			
+		if(angle > 336 || angle < 22) {
 			this.player.animations.play('up');
-		} else if(angle >= 120 && angle < 165) {
-			
+			this.player.scale.x = 1;
+		} else if(angle >= 22 && angle < 66) {
 			this.player.animations.play('upright');
-		} else if(angle >= 165 && angle < 210) {
-			
+			this.player.scale.x = 1;
+		} else if(angle >= 66 && angle < 111) {
 			this.player.animations.play('right');
-		} else if(angle >= 210 && angle < 255) {
-			
+			this.player.scale.x = 1;
+		} else if(angle >= 111 && angle < 156) {
 			this.player.animations.play('downright');
-		} else if(angle >= 255 && angle < -60 ) {
-			
+			this.player.scale.x = 1;
+		} else if(angle >= 156 && angle < 201 ) {
 			this.player.animations.play('down');
-		} else if(angle >= -60 && angle < -15 ) {
-			
+			this.player.scale.x = 1;
+		} else if(angle >= 201 && angle < 246 ) {
 			this.player.animations.play('downright');
 			this.player.scale.x = -1;
-		} else if(angle >= -15 && angle < 30 ) {
-			
+		} else if(angle >= 246 && angle < 291 ) {
 			this.player.animations.play('right');
 			this.player.scale.x = -1;
-		} else if(angle >= 30 && angle < 75 ) {
-			
+		} else if(angle >= 291 && angle < 336 ) {
 			this.player.animations.play('upright');
 			this.player.scale.x = -1;
 		}
