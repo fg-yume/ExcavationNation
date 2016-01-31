@@ -30,9 +30,9 @@ PhaserGame.prototype = {
 		this.load.image('rune3', 'img/rune3.png');
 		this.load.spritesheet('playersprite', 'img/playersprite.png', 34, 36);
 		
-		this.load.audio('soundtrack', 'audio/MagicalGirl.wav');
+		this.load.audio('soundtrack', 'audio/Magical_Girl.wav');
 		//this.load.audio('energyBall', 'audio/MagicalGirl-EnergyBall#3.wav');
-		//this.load.audio('itemPickup', 'audio/MagicalGirl-ItemPickup.wav');
+		//his.load.audio('itemPickup', 'audio/MagicalGirl-ItemPickup.wav');
 		//this.load.audio('jellySquish', 'audio/MagicalGirl-JellySquish.wav');
 		//this.load.audio('ow', 'audio/MagicalGirl-Ow.wav');
 	},
@@ -49,7 +49,7 @@ PhaserGame.prototype = {
 		this.runes.push(new Rune(this, 200, 400, 'rune3'));
 		this.runes.push(new Rune(this, 600, 400, 'rune2'));
 		this.runes.push(new Rune(this, 400, 600, 'rune1'));
-		this.currentWeapon = 1;
+		this.currentWeapon = 0;
 		this.pointer = this.input.mousePointer;
 		
 		this.player.animations.add('up', [0, 1], 10, true);
@@ -65,12 +65,13 @@ PhaserGame.prototype = {
 		
 		if(this.pointer.isDown) {
 			this.weapons[this.currentWeapon].fire(this.player, this.pointer);
-			this.energyBlast.play();
+			//this.energyBlast.play();
 		}
 		
 		this.moving = false;
 		
 		if(this.keyboard.isDown(65)) {
+			this.moving = true;
 			if(this.player.body.position.x - 100 > 0 || this.background.x >= 0) {
 				this.player.body.velocity.x = -this.speed;
 			} else {
@@ -83,6 +84,7 @@ PhaserGame.prototype = {
 				}*/
 			}
 		} else if(this.keyboard.isDown(68)) {
+			this.moving = true;
 			if(this.player.body.position.x + this.player.body.width + 100 < 800 || this.background.x <= -this.background.height + this.game.height) {
 				this.player.body.velocity.x = this.speed;
 			} else {
@@ -96,6 +98,7 @@ PhaserGame.prototype = {
 		}
 		
 		if(this.keyboard.isDown(87)) {
+			this.moving = true;
 			if(this.player.body.position.y - 100 > 0 || this.background.y >= 0) {
 				this.player.body.velocity.y = -this.speed;
 			} else {
@@ -107,6 +110,7 @@ PhaserGame.prototype = {
 				}*/
 			}
 		} else if(this.keyboard.isDown(83)) {
+			this.moving = true;
 			if(this.player.body.position.y + this.player.body.height + 100 < 800 || this.background.y <= -this.background.width + this.game.width) {
 				this.player.body.velocity.y = this.speed;
 			} else {
@@ -132,29 +136,54 @@ PhaserGame.prototype = {
 		}
 		
 		if(angle > 336 || angle < 22) {
-			this.player.animations.play('up');
 			this.player.scale.x = 1;
+			if(this.moving)
+				this.player.animations.play('up');
+			else
+				this.player.frame = 0;
+			
 		} else if(angle >= 22 && angle < 66) {
-			this.player.animations.play('upright');
 			this.player.scale.x = 1;
+			if(this.moving)
+				this.player.animations.play('upright');
+			else 
+				this.player.frame = 2;
 		} else if(angle >= 66 && angle < 111) {
-			this.player.animations.play('right');
 			this.player.scale.x = 1;
+			if(this.moving)
+				this.player.animations.play('right');
+			else 
+				this.player.frame = 4;
 		} else if(angle >= 111 && angle < 156) {
-			this.player.animations.play('downright');
 			this.player.scale.x = 1;
+			if(this.moving)
+				this.player.animations.play('downright');
+			else
+				this.player.frame = 6;
 		} else if(angle >= 156 && angle < 201 ) {
-			this.player.animations.play('down');
 			this.player.scale.x = 1;
+			if(this.moving)
+				this.player.animations.play('down');
+			else 
+				this.player.frame = 8;
 		} else if(angle >= 201 && angle < 246 ) {
-			this.player.animations.play('downright');
 			this.player.scale.x = -1;
+			if(this.moving)
+				this.player.animations.play('downright');
+			else 
+				this.player.frame = 6;
 		} else if(angle >= 246 && angle < 291 ) {
-			this.player.animations.play('right');
 			this.player.scale.x = -1;
+			if(this.moving)
+				this.player.animations.play('right');
+			else 
+				this.player.frame = 4;
 		} else if(angle >= 291 && angle < 336 ) {
-			this.player.animations.play('upright');
 			this.player.scale.x = -1;
+			if(this.moving)
+				this.player.animations.play('upright');
+			else
+				this.player.frame = 2;
 		}
 	}
 };
