@@ -1,5 +1,4 @@
 "use strict";
-var game = game || new Phaser.Game(800, 800, Phaser.Auto, 'game');
 
 // namespace
 var PhaserGame = PhaserGame || {};
@@ -20,9 +19,6 @@ Engine.UnitManager = (function()
         this.units.enableBody = true;
         this.units.physicsBodyType = Phaser.Physics.ARCADE;
 
-        this.units.health = 0;
-        this.units.prototype.unitType = Engine.UnitTypes;
-
         // keeps track of unit types that have been destroyed
         this.destroyedUnits = new Map(); // UnitType / amount
     };
@@ -37,7 +33,7 @@ Engine.UnitManager = (function()
     {
         var unit = this.units.create(x, y, assetName);
         unit.health = hp;
-        unit.unitType = unitType;
+        unit.prototype.unitType = (unitType === "undefined") ? Engine.UnitTypes.NUM_TYPES : unitType;
 
         // TODO: phaser anchors and animations
     }
@@ -69,6 +65,11 @@ Engine.UnitManager = (function()
         { 
             return amnt; 
         }
+    }
+
+    UnitManager.prototype.update = function()
+    {
+
     }
 
 })();
