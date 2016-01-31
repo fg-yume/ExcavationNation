@@ -1,6 +1,6 @@
-var game = game || new Phaser.Game(800, 800, Phaser.Auto, 'game');
+"use strict";
 
-var PhaserGame = function() {
+var PhaserGame = PhaserGame || function() {
 	this.background = null;
 	this.foreground = null;
 	
@@ -17,11 +17,11 @@ var PhaserGame = function() {
 PhaserGame.prototype = {
 	init: function() {
 		this.game.renderer.renderSession.roundPixel = true;
-		this.physics.startSystem(Phaser.Physics.ARCADE);
+		// Moved to boot
+		//this.physics.startSystem(Phaser.Physics.ARCADE);
 	},
 	preload: function() {
-		this.load.image('player', 'img/player.png');
-		this.load.image('background', 'img/background.png');
+
 		this.load.image('bullet', 'img/bullet.png');
 		this.load.spritesheet('playersprite', 'img/playersprite.png', 34, 36);
 	},
@@ -122,5 +122,3 @@ PhaserGame.prototype = {
 		}
 	}
 };
-
-game.state.add('Game', PhaserGame, true);
