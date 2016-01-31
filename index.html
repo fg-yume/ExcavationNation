@@ -1,15 +1,42 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>ak;ldsw;ahwtejkwajkewafwaejkw</title>
-		<script src="libraries/phaser.min.js"></script>
-		<script src="scripts/bullet.js"></script>
-		<script src="scripts/weapon.js"></script>
-		<script src="scripts/unitManager.js"></script>
-		<script src="scripts/game.js"></script>
-	</head>
-	<body>
-		<div id="game"></div>
-	</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>ak;ldsw;ahwtejkwajkewafwaejkw</title>
+        <script src="libraries/phaser.min.js"></script>
+        
+        <!-- states -->
+        <script src="scripts/boot.js"></script>
+        <script src="scripts/load.js"></script>
+        <script src="scripts/splashScreen.js"></script>
+        <script src="scripts/game.js"></script>
+
+        <script src="scripts/bullet.js"></script>
+        <script src="scripts/weapon.js"></script>
+        <script src="scripts/unitManager.js"></script>
+
+        <!-- entry -->
+        <script>
+            "use strict";
+
+            //IFFE
+            (function() {
+                var game = new Phaser.Game(800, 800, Phaser.Auto, 'game');
+
+                game.state.add("Boot", Boot);
+                game.state.add("Load", Load);
+                game.state.add("SplashScreen", SplashScreen);
+                //game.state.add("Title", Title);
+                game.state.add("Game", PhaserGame);
+                //game.state.add("Credits", Credits);
+                //game.state.add("End", GameOver);
+
+                // Entry point at boot
+                game.state.start("Boot");
+            })();
+        </script>
+    </head>
+    <body>
+        <div id="game"></div>
+    </body>
 </html>
