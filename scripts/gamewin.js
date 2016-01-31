@@ -8,8 +8,6 @@ var GameWin = function(game){
 
 GameWin.prototype = {
     preload: function(){
-        this.load.image("win", "img/win.png" );
-	
     },
 
     create: function(){

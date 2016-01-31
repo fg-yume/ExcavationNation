@@ -23,7 +23,8 @@ PhaserGame.prototype = {
 		//this.physics.startSystem(Phaser.Physics.ARCADE);
 	},
 	preload: function() {
-
+		// Game Win
+		this.load.image("win", "img/win.png" );
 	},
 	create: function() {
 		this.background = this.add.sprite(-1600, -1600, 'background');
