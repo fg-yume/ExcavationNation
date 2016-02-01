@@ -15,7 +15,7 @@ var Unit = function( game, x, y, hp, imgKey )
     
     this.health = hp;
     this.weapons = [];
-    this.range = {x: 100, y: 100};
+    this.range = {x: 500, y: 500}; //< 1000 x 1000 square
 
     switch( imgKey )
     {
@@ -56,9 +56,10 @@ Unit.prototype.attack = function( playerX, playerY )
 
 Unit.prototype.isInRange = function( playerX, playerY )
 {
-    if ( ( this.x - this.range.x <= playerX || 
+
+    if ( ( this.x - this.range.x <= playerX && 
             this.x + this.range.x >= playerX ) &&
-        ( this.y - this.range.y <= playerY || 
+        ( this.y - this.range.y <= playerY && 
             this.y + this.range.y >= playerY ) )
         {
             // player is within range
