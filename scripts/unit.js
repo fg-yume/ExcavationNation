@@ -15,6 +15,7 @@ var Unit = function( game, x, y, hp, imgKey )
     
     this.health = hp;
     this.weapons = [];
+    this.range = {x: 100, y: 100};
 
     switch( imgKey )
     {
@@ -37,13 +38,34 @@ var Unit = function( game, x, y, hp, imgKey )
 Unit.prototype = Object.create( Phaser.Sprite.prototype );
 Unit.prototype.constructor = Unit;
 
-// TODO: fire & update
-Unit.prototype.update = function( game, playerX, playerY )
+Unit.prototype.update = function( playerX, playerY )
+{
+    if( this.isInRange( playerX, playerY ) )
+    {
+        this.attack( playerX, playerY );
+    }
+};
+
+Unit.prototype.attack = function( playerX, playerY )
 {
     var src = {x : this.x, y: this.y};
     var target = {x: playerX, y: playerY};
 
     this.weapons[0].fire( src, target );
+};
+
+Unit.prototype.isInRange = function( playerX, playerY )
+{
+    if ( ( this.x - this.range.x <= playerX || 
+            this.x + this.range.x >= playerX ) &&
+        ( this.y - this.range.y <= playerY || 
+            this.y + this.range.y >= playerY ) )
+        {
+            // player is within range
+            return true;
+        }
+
+    return false;
 };
 
 Unit.prototype.move = function( x, y )

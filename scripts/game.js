@@ -67,7 +67,7 @@ PhaserGame.prototype = {
 
 		for( var i = this.enemyUnits.children.length -1; i >= 0; --i )
 		{
-			this.enemyUnits.children[i].update( this.game, this.player.x, this.player.y );
+			this.enemyUnits.children[i].update( this.player.x, this.player.y );
 		}
 		//this.enemyUnits[0].update( this.game, this.player );
 		

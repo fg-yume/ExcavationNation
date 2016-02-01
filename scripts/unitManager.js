@@ -5,11 +5,6 @@ var UnitManager = {};
 
 UnitManager.Units = function(game){
     Phaser.Group.call(this, game, game.world, 'Units', false, true, Phaser.Physics.ARCADE);
-
-    console.log( "pre add first");
-    //this.add( new Unit( this.game, 100, 100, 100, "ranged_enemy" ) );
-
-    console.log( "pre add second");
     return this;
 };
 
