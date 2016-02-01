@@ -4,15 +4,17 @@ var Weapon = {};
 /************************************************************
 *						SINGLE SHOT							*
 ************************************************************/
-Weapon.SingleBullet = function(game) {
+Weapon.SingleBullet = function(game, imgKey) {
 	Phaser.Group.call(this, game, game.world, 'Single Bullet', false, true, Phaser.Physics.ARCADE);
 	
+	var key = imgKey || 'bullet';
+
 	this.nextFire = 0;
 	this.bulletSpeed = 600;
 	this.fireRate = 100;
 	
 	for(var i = 0; i < 64; i++) {
-		this.add(new Bullet(game, 'bullet', true));
+		this.add(new Bullet(game, imgKey, true));
 	}
 	
 	return this;

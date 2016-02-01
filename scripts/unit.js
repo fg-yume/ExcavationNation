@@ -21,8 +21,9 @@ var Unit = function( game, x, y, hp, imgKey )
     {
         case "ranged_enemy":
             console.log("ranged")
-            this.weapons.push( new Weapon.SingleBullet( game ) );
+            this.weapons.push( new Weapon.SingleBullet( game, 'bullet2' ) );
         break;
+        // TODO: ranged enemy #2
 
         case "melee":
             // TODO: change

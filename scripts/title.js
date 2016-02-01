@@ -18,6 +18,7 @@ Title.prototype = {
 
         // Sprites ---
         this.load.image('bullet', 'img/bullet.png');
+        this.load.image('bullet2', 'img/bullet2.png');
         this.load.image('rune1', 'img/rune1.png');
         this.load.image('rune2', 'img/rune2.png');
         this.load.image('rune3', 'img/rune3.png');
