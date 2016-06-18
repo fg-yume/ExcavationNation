@@ -241,6 +241,13 @@ PhaserGame.prototype = {
 	testFunc: function(enemy, bullet){
 		console.log("mama mia");
 		bullet.kill();
+		var isDead = enemy.takeDamage(50);
+
+		if( isDead )
+		{
+			console.log("ded bois");
+			this.enemyUnits.remove(enemy);
+		}
 	},
 	
 	shutdown: function(){
