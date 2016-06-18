@@ -233,6 +233,14 @@ PhaserGame.prototype = {
 		if(this.runes.length == 0){
 			this.game.state.start("Win")
 		}
+
+		// Collision detection
+		this.game.physics.arcade.overlap(this.weapons[this.currentWeapon], this.enemyUnits.children[0], this.testFunc, null, this);
+	},
+
+	testFunc: function(enemy, bullet){
+		console.log("mama mia");
+		bullet.kill();
 	},
 	
 	shutdown: function(){
