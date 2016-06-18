@@ -51,8 +51,13 @@ Unit.prototype.takeDamage = function( amount )
 {
     this.health -= amount;
 
-    if( this. health <= 0 )
+    if( this.health <= 0 )
+    {
         this.kill();
+        return true;
+    }
+
+    return false;
 };
 
 Unit.prototype.attack = function( playerX, playerY )
