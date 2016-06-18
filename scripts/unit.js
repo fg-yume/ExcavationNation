@@ -31,7 +31,7 @@ var Unit = function( game, x, y, hp, imgKey )
         break;
         default:
             console.log("default ranged");
-            this.weapons.push( new Weapon.SingleBullet( game ) );
+            this.weapons.push( new Weapon.SingleBullet( game, 'bullet2' ) );
         break;
     }
 };
