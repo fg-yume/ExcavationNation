@@ -47,6 +47,14 @@ Unit.prototype.update = function( playerX, playerY )
     }
 };
 
+Unit.prototype.takeDamage = function( amount )
+{
+    this.health -= amount;
+
+    if( this. health <= 0 )
+        this.kill();
+};
+
 Unit.prototype.attack = function( playerX, playerY )
 {
     var src = {x : this.x, y: this.y};
